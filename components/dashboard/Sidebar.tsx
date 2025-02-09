@@ -5,6 +5,7 @@ import { LayoutDashboard, Plus, Shield, UserCircle } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Progress } from "../ui/progress";
 import Link from "next/link";
+import Image from "next/image";
 
 const Sidebar = () => {
   const MenuList = [
@@ -29,10 +30,10 @@ const Sidebar = () => {
   return (
     <div className="h-screen shadow-md p-5">
       <div className="flex gap-2 items-center">
-        <span>Logo</span>
+        <Image src={'/logo.png'} width={80} height={80} alt="logo" />
         <h2 className="font-bold text-2xl">LearNova</h2>
       </div>
-      <div className="mt-10">
+      <div className="mt-8">
         <Button className="w-full space-x-1">
           <Plus />
           <span>Create New</span>
