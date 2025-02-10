@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 
 const Navbar = () => {
@@ -6,7 +7,7 @@ const Navbar = () => {
     return (
         <nav className="bg-violet-600 p-4 shadow-md">
             <div className="container mx-auto flex justify-between items-center">
-                <div className="text-white text-2xl font-bold">Logo</div>
+                <div className="text-white text-2xl font-bold"><img src="/sth.jpg" alt="logo" className="w-24 rounded-2xl"/></div>
                 <div className="hidden md:flex space-x-6 text-white text-lg">
                     <a href="#" className="hover:">Home</a>
                     <a href="#" className="hover:">About Us</a>
