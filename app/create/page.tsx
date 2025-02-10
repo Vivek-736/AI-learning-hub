@@ -2,14 +2,23 @@
 import SelectCards from "@/components/inputField/SelectCards";
 import TopicInput from "@/components/inputField/TopicInput";
 import { Button } from "@/components/ui/button";
+import { useUser } from "@clerk/nextjs";
+import axios from "axios";
+import { uuid } from "drizzle-orm/pg-core";
+import { Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
 const Create = () => {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({});
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const { user } = useUser();
 
   interface FormData {
-    studyType?: string;
+    courseType?: string;
     topic?: string;
     difficultyLevel?: string;
   }
@@ -25,6 +34,19 @@ const Create = () => {
     }));
   };
 
+  const GenerateCourseOutline = async () => {
+    const courseId = uuid();
+    setLoading(true);
+    const result = await axios.post("/api/generate-course-outline", {
+      courseId: courseId,
+      ...formData,
+      createdBy: user?.primaryEmailAddress?.emailAddress,
+    });
+    setLoading(false);
+    router.replace("/dashboard")
+    console.log(result);
+  };
+
   return (
     <div className="flex flex-col items-center p-5 md:px-24 lg:px-36 mt-20">
       <h2 className="font-bold text-3xl text-sky-500">
@@ -36,7 +58,7 @@ const Create = () => {
       <div className="mt-10">
         {step === 0 ? (
           <SelectCards
-            SelectedStudyType={(value) => handleUserInput("studyType", value)}
+            SelectedStudyType={(value) => handleUserInput("courseType", value)}
           />
         ) : (
           <TopicInput
@@ -58,7 +80,7 @@ const Create = () => {
         {step === 0 ? (
           <Button onClick={() => setStep(step + 1)}>Next</Button>
         ) : (
-          <Button>Generate</Button>
+          <Button onClick={GenerateCourseOutline} disabled={loading}>{loading ? <Loader className="animate-spin" /> : "Generate"}</Button>
         )}
       </div>
     </div>
