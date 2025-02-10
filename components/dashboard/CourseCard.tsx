@@ -1,13 +1,37 @@
-import React from "react";
+"use client";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useUser } from "@clerk/nextjs";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import CourseItem from "./CourseItem";
 
 const CourseCard = () => {
-    const GetCourseCard = () => {
+    const { user } = useUser();
+    const [courseCard, setCourseCard] = useState([]);
 
+    useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        user && GetCourseCard();
+    }, [user]);
+
+    const GetCourseCard = async () => {
+        const result = await axios.post("/api/courses", {
+            createdBy: user?.primaryEmailAddress?.emailAddress
+        })
+        console.log(result);
+        setCourseCard(result.data.result);
     };
 
     return (
-        <div>
-            CourseCard
+        <div className="mt-10">
+            <h2 className="text-2xl font-bold text-slate-800">
+                Your Courses
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 mt-2 gap-5">
+                {courseCard?.map((course, index) => (
+                    <CourseItem course={course} key={index} />
+                ))}
+            </div>
         </div>
     )
 };
