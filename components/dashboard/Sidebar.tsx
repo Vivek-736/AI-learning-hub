@@ -34,10 +34,12 @@ const Sidebar = () => {
         <h2 className="font-bold text-2xl">LearNova</h2>
       </div>
       <div className="mt-8">
-        <Button className="w-full space-x-1">
-          <Plus />
-          <span>Create New</span>
-        </Button>
+        <Link href={`/create`} className="w-full">
+          <Button className="space-x-1 w-full">
+            <Plus />
+            <span>Create New</span>
+          </Button>
+        </Link>
         <div>
             {MenuList.map((menu, index) => (
                 <div key={index} className={`flex gap-2 items-center p-3 hover:bg-slate-200 rounded-lg cursor-pointer mt-3 ${path === menu.path && 'bg-slate-200'}`}>
