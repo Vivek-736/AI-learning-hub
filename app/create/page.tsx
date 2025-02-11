@@ -8,6 +8,7 @@ import { uuid } from "drizzle-orm/pg-core";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 const Create = () => {
   const [step, setStep] = useState(0);
@@ -44,6 +45,7 @@ const Create = () => {
     });
     setLoading(false);
     router.replace("/dashboard")
+    toast("Your course content is being generated, please wait for a moment or try clicking the refresh button");
     console.log(result);
   };
 
