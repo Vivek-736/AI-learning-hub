@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Progress } from "../ui/progress";
 import { Button } from "../ui/button";
 import { RefreshCcw } from "lucide-react";
+import Link from "next/link";
 
 interface CourseItemProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,7 +16,7 @@ const CourseItem = ({ course }: CourseItemProps) => {
       <div className="flex justify-between items-center">
         <Image src={"/course.png"} alt="a laptop pic" width={50} height={50} />
         <h2 className="text-[10px] p-1 px-2 rounded-full bg-indigo-500 text-white">
-          10 Dec 2025
+          12 Dec 2025
         </h2>
       </div>
       <h2 className="mt-3 font-medium text-xl">
@@ -34,7 +35,9 @@ const CourseItem = ({ course }: CourseItemProps) => {
             Generating...
           </h2>
         ) : (
-          <Button>View</Button>
+          <Link href={`/course/${course?.id}`}>
+            <Button>View</Button>
+          </Link>
         )}
       </div>
     </div>
