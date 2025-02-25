@@ -4,7 +4,7 @@ import TopicInput from "@/components/inputField/TopicInput";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
-import { uuid } from "drizzle-orm/pg-core";
+import { v4 as uuidv4 } from "uuid";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
@@ -36,17 +36,23 @@ const Create = () => {
   };
 
   const GenerateCourseOutline = async () => {
-    const courseId = uuid();
+    const courseId = uuidv4(); // Generate UUID using uuid library
     setLoading(true);
-    const result = await axios.post("/api/generate-course-outline", {
-      courseId: courseId,
-      ...formData,
-      createdBy: user?.primaryEmailAddress?.emailAddress,
-    });
-    setLoading(false);
-    router.replace("/dashboard")
-    toast("Your course content is being generated, please wait for a moment or try clicking the refresh button");
-    console.log(result);
+    try {
+      const result = await axios.post("/api/generate-course-outline", {
+        courseId: courseId,
+        ...formData,
+        createdBy: user?.primaryEmailAddress?.emailAddress,
+      });
+      console.log(result);
+      toast("Your course content is being generated, please wait for a moment or try clicking the refresh button");
+      router.replace("/dashboard");
+    } catch (error) {
+      console.error("Error generating course outline:", error);
+      toast("An error occurred while generating the course outline.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

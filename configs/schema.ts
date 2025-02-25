@@ -30,6 +30,5 @@ export const CHAPTER_NOTES_TABLE = pgTable("chapter_notes", {
   id: serial().primaryKey(),
   courseId: varchar().notNull(),
   chapterId: integer().notNull(),
-  studyMaterialId: integer().references(() => STUDY_MATERIAL_TABLE.id),
   notes: text(),
 });

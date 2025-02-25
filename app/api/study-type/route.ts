@@ -4,13 +4,13 @@ import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const { id, studyType } = await req.json();
+  const { courseId, studyType } = await req.json();
 
   if (studyType == "ALL") {
     const notes = await db
       .select()
       .from(CHAPTER_NOTES_TABLE)
-      .where(eq(CHAPTER_NOTES_TABLE?.studyMaterialId, id));
+      .where(eq(CHAPTER_NOTES_TABLE?.courseId, courseId));
 
     const result = {
       notes: notes,
