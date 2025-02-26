@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import LearningCardItem from "./LearningCardItem";
 import axios from "axios";
+import Link from "next/link";
 
 interface LearningResourceSecProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,28 +18,28 @@ const LearningResourceSec = ({ courseId }: LearningResourceSecProps) => {
       desc: "Pliant and organized notes for quick prep",
       icon: "/notes.png",
       path: "/notes",
-      type: "notes"
+      type: "notes",
     },
     {
       name: "Flashcards",
       desc: "Quick and interactive flashcards",
       icon: "/flashcards.png",
       path: "/flashcards",
-      type: "flashcard"
+      type: "flashcard",
     },
     {
       name: "Quiz",
       desc: "Engaging quizzes to test your knowledge",
       icon: "/quiz.png",
       path: "/quiz",
-      type: "quiz"
+      type: "quiz",
     },
     {
       name: "QnA",
       desc: "Get instant answers to your questions",
       icon: "/QnA.png",
       path: "/qa",
-      type: "qa"
+      type: "qa",
     },
   ];
 
@@ -61,7 +62,13 @@ const LearningResourceSec = ({ courseId }: LearningResourceSecProps) => {
       <h2 className="font-medium text-xl">Learning Resources</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-3">
         {LearningList.map((item, index) => (
-          <LearningCardItem key={index} item={item} studyTypeContent={studyTypeContent} />
+          <Link key={index} href={`/course/${courseId}${item.path}`}>
+            <LearningCardItem
+              key={index}
+              item={item}
+              studyTypeContent={studyTypeContent}
+            />
+          </Link>
         ))}
       </div>
     </div>

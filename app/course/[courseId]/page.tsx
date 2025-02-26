@@ -2,7 +2,6 @@
 import ChapterList from '@/components/course/ChapterList';
 import CourseIntro from '@/components/course/CourseIntro';
 import LearningResourceSec from '@/components/course/LearningResourceSec';
-import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -27,8 +26,7 @@ const page = () => {
 
     return (
       <div>
-        <DashboardHeader />
-        <div className='mx-10 md:mx-36 lg:px-44 mt-10'>
+        <div>
           <CourseIntro course={course} />
           <LearningResourceSec courseId={courseId} />
           <ChapterList course={course} />

@@ -20,4 +20,11 @@ export async function POST(req: Request) {
     };
     return NextResponse.json(result);
   }
+  else if(studyType == "notes") {
+    const notes = await db
+      .select()
+      .from(CHAPTER_NOTES_TABLE)
+      .where(eq(CHAPTER_NOTES_TABLE?.courseId, courseId));
+    return NextResponse.json(notes);
+  }
 }
