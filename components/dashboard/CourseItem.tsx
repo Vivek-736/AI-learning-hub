@@ -35,7 +35,7 @@ const CourseItem = ({ course }: CourseItemProps) => {
             Generating...
           </h2>
         ) : (
-          <Link href={`/course/${course?.id}`}>
+          <Link href={`/course/${course?.courseId}`}>
             <Button>View</Button>
           </Link>
         )}

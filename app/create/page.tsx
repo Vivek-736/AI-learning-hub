@@ -36,7 +36,7 @@ const Create = () => {
   };
 
   const GenerateCourseOutline = async () => {
-    const courseId = uuidv4(); // Generate UUID using uuid library
+    const courseId = uuidv4();
     setLoading(true);
     try {
       const result = await axios.post("/api/generate-course-outline", {

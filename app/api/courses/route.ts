@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     .select()
     .from(STUDY_MATERIAL_TABLE)
     .where(eq(STUDY_MATERIAL_TABLE.createdBy, createdBy))
-    .orderBy(desc(STUDY_MATERIAL_TABLE.id));
+    .orderBy(desc(STUDY_MATERIAL_TABLE.courseId));
 
   return NextResponse.json({ result: result });
 }
@@ -18,11 +18,11 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
   const reqUrl = req.url;
   const { searchParams } = new URL(reqUrl);
-  const id = searchParams?.get("id");
+  const courseId = searchParams?.get("courseId");
 
-  if (!id) {
+  if (!courseId) {
     return NextResponse.json(
-      { error: "courseId is required" },
+      { error: "coursecourseId is required" },
       { status: 400 }
     );
   }
@@ -30,7 +30,7 @@ export async function GET(req: Request) {
   const course = await db
     .select()
     .from(STUDY_MATERIAL_TABLE)
-    .where(eq(STUDY_MATERIAL_TABLE.id, Number(id)));
+    .where(eq(STUDY_MATERIAL_TABLE.courseId, courseId));
 
   return NextResponse.json({ result: course[0] });
 }

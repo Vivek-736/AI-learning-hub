@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react'
 
 const page = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { id } = useParams();
+    const { courseId } = useParams();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [course, setCourse] = useState();
 
@@ -20,7 +20,7 @@ const page = () => {
     }, [])
 
     const GetCourse = async () => {
-      const result = await axios.get(`/api/courses?id=${id}`);
+      const result = await axios.get(`/api/courses?courseId=${courseId}`);
       console.log(result);
       setCourse(result.data.result);
     }
@@ -30,7 +30,7 @@ const page = () => {
         <DashboardHeader />
         <div className='mx-10 md:mx-36 lg:px-44 mt-10'>
           <CourseIntro course={course} />
-          <LearningResourceSec />
+          <LearningResourceSec courseId={courseId} />
           <ChapterList course={course} />
         </div>
       </div>
