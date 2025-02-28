@@ -58,7 +58,7 @@ export const GenerateNotes = inngest.createFunction(
       let index = 0;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       Chapters.forEach(async(chapter: any) => {
-        const PROMPT = `Generate exam material detail content for each chapter, make sure to includes all topic point in the content, make sure to give content in HTML format (Do not add HTML KL, Head, Body, title tag), The chapters : |` + JSON.stringify(chapter);
+        const PROMPT = `Generate detailed study material content for each chapter in HTML format, following a consistent structure: use <h1> with an emoji for the chapter title, provide an introduction with <p>, list key topics with <h2> and <ul> using emojis, include detailed explanations with <p> and <strong>, add examples with <pre> or <code>, highlight important notes with <strong> or <em>, and summarize exam focus areas with <h2> and <ul>; ensure the content is well-organized, visually appealing, and exam-focused, avoiding <html>, <head>, <body>, or <title> tags, for the chapters: ` + JSON.stringify(chapter);
         const result = await generateNotes.sendMessage(PROMPT);
         const aiRes = result.response.text();
 
