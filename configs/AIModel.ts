@@ -63,5 +63,23 @@ export const generateNotes = model.startChat({
   ],
 });
 
+export const GenerateStudyTypeContent = model.startChat({
+  generationConfig,
+  history: [
+    {
+      role: "user",
+      parts: [
+        {text: "Generate the flashcard on topic : TailwindCSS, UserInterface (UI) Development.Basic classes in JSON format with only\nfront  and  back content, Maximum 15"},
+      ],
+    },
+    {
+      role: "model",
+      parts: [
+        {text: "```json\n[\n  {\n    \"front\": \"What Tailwind class controls text color?\",\n    \"back\": \"text-{color}-{brightness (optional)}\"\n  },\n  {\n    \"front\": \"How do you apply a background color using Tailwind?\",\n    \"back\": \"bg-{color}-{brightness (optional)}\"\n  },\n  {\n    \"front\": \"What Tailwind classes set padding?\",\n    \"back\": \"p-{size}, px-{size}, py-{size}, pt-{size}, pb-{size}, pl-{size}, pr-{size}\"\n  },\n  {\n    \"front\": \"How do you add margins with Tailwind?\",\n    \"back\": \"m-{size}, mx-{size}, my-{size}, mt-{size}, mb-{size}, ml-{size}, mr-{size}\"\n  },\n  {\n    \"front\": \"What Tailwind class is used for setting font weight?\",\n    \"back\": \"font-{weight}\"\n  },\n  {\n    \"front\": \"How do you change the font size in Tailwind?\",\n    \"back\": \"text-{size}\"\n  },\n  {\n    \"front\": \"Which Tailwind class makes an element a flex container?\",\n    \"back\": \"flex\"\n  },\n  {\n    \"front\": \"How to center items vertically in a flex container using Tailwind?\",\n    \"back\": \"items-center\"\n  },\n  {\n    \"front\": \"How to center items horizontally in a flex container using Tailwind?\",\n    \"back\": \"justify-center\"\n  },\n  {\n    \"front\": \"What Tailwind class is used to create rounded corners?\",\n    \"back\": \"rounded-{size}\"\n  },\n  {\n    \"front\": \"How do you add a border with Tailwind?\",\n    \"back\": \"border-{width (optional)} border-{color (optional)}\"\n  },\n  {\n    \"front\": \"What Tailwind class hides an element?\",\n    \"back\": \"hidden\"\n  },\n  {\n    \"front\": \"How do you make an element visible using Tailwind?\",\n    \"back\": \"visible\"\n  },\n  {\n    \"front\": \"What Tailwind class makes an element `inline-block`?\",\n    \"back\": \"inline-block\"\n  },\n  {\n    \"front\": \"How do you set the display property to `block` with Tailwind?\",\n    \"back\": \"block\"\n  }\n]\n```"},
+      ],
+    },
+  ],
+});
+
 // const result = await courseOutline.sendMessage("INSERT_INPUT_HERE");
 // console.log(result.response.text());

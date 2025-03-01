@@ -1,7 +1,7 @@
-import { generateNotes } from "@/configs/AIModel";
+import { generateNotes, GenerateStudyTypeContent } from "@/configs/AIModel";
 import { inngest } from "./client";
 import { db } from "@/configs/db";
-import { CHAPTER_NOTES_TABLE, STUDY_MATERIAL_TABLE, USER_TABLE } from "@/configs/schema";
+import { CHAPTER_NOTES_TABLE, STUDY_MATERIAL_TABLE, STUDY_TYPE_CONTENT_TABLE, USER_TABLE } from "@/configs/schema";
 import { eq } from "drizzle-orm";
 
 export const helloWorld = inngest.createFunction(
@@ -81,3 +81,31 @@ export const GenerateNotes = inngest.createFunction(
     });
   }
 );
+
+export const GenerateStudyContent = inngest.createFunction(
+  {id: "Generate Study Type Content"},
+  {event: "studyType.content"},
+  async ({event, step}) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const {studyType, prompt, courseId, recordId} = event.data;
+
+    const FlashCardAiResult = await step.run('Generating FlashCard using AI', async() => {
+      const result = await GenerateStudyTypeContent.sendMessage(prompt);
+      const aiRes = JSON.parse(result.response.text());
+      return aiRes;
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const DbResult = await step.run("Save Result to DB", async() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const result = await db.update(STUDY_TYPE_CONTENT_TABLE).set({
+        content: FlashCardAiResult,
+        status: "Ready"
+      }).where(
+          eq(STUDY_TYPE_CONTENT_TABLE.id, recordId),
+      );
+
+      return "Data Inserted";
+    })
+  }
+)

@@ -28,7 +28,7 @@ const page = () => {
       <div>
         <div>
           <CourseIntro course={course} />
-          <LearningResourceSec courseId={courseId} />
+          <LearningResourceSec course={course} courseId={courseId} />
           <ChapterList course={course} />
         </div>
       </div>

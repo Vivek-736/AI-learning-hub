@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useState } from "react";
 import LearningCardItem from "./LearningCardItem";
@@ -5,12 +6,12 @@ import axios from "axios";
 import Link from "next/link";
 
 interface LearningResourceSecProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  courseId: any;
+  courseId: string;
+  course: any;
 }
 
-const LearningResourceSec = ({ courseId }: LearningResourceSecProps) => {
-  const [studyTypeContent, setStudyTypeContent] = useState();
+const LearningResourceSec = ({ courseId, course }: LearningResourceSecProps) => {
+  const [studyTypeContent, setStudyTypeContent] = useState<Record<string, any>>({});
 
   const LearningList = [
     {
@@ -21,7 +22,7 @@ const LearningResourceSec = ({ courseId }: LearningResourceSecProps) => {
       type: "notes",
     },
     {
-      name: "Flashcards",
+      name: "Flashcard",
       desc: "Quick and interactive flashcards",
       icon: "/flashcards.png",
       path: "/flashcards",
@@ -45,16 +46,19 @@ const LearningResourceSec = ({ courseId }: LearningResourceSecProps) => {
 
   useEffect(() => {
     GetLearningList();
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courseId]);
 
   const GetLearningList = async () => {
-    const result = await axios.post("/api/study-type", {
-      courseId: courseId,
-      studyType: "ALL",
-    });
-
-    console.log(result?.data);
-    setStudyTypeContent(result.data);
+    try {
+      const result = await axios.post("/api/study-type", {
+        courseId: courseId,
+        studyType: "ALL",
+      });
+      setStudyTypeContent(result.data);
+    } catch (error) {
+      console.error("Failed to fetch learning resources:", error);
+    }
   };
 
   return (
@@ -62,11 +66,12 @@ const LearningResourceSec = ({ courseId }: LearningResourceSecProps) => {
       <h2 className="font-medium text-xl">Learning Resources</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-3">
         {LearningList.map((item, index) => (
-          <Link key={index} href={`/course/${courseId}${item.path}`}>
+          <Link key={index} href={`/course/${courseId}${item.path}`} passHref>
             <LearningCardItem
-              key={index}
               item={item}
               studyTypeContent={studyTypeContent}
+              course={course}
+              refreshData={GetLearningList}
             />
           </Link>
         ))}
