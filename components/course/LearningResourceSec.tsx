@@ -6,7 +6,7 @@ import axios from "axios";
 import Link from "next/link";
 
 interface LearningResourceSecProps {
-  courseId: string;
+  courseId: any;
   course: any;
 }
 
