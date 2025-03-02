@@ -18,7 +18,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         notes: notes,
         flashcard: contentList.filter(item => item.type.toLowerCase() === "flashcard"),
-        quiz: null,
+        quiz: contentList.filter(item => item.type.toLowerCase() === "quiz"),
         qa: null
       });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
