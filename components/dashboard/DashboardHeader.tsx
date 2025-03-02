@@ -1,9 +1,27 @@
+"use client";
 import { UserButton } from "@clerk/nextjs";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
 const DashboardHeader = () => {
+  const [isDashboard, setIsDashboard] = useState(false);
+
+  useEffect(() => {
+    if (window.location.pathname.endsWith('/dashboard')) {
+      setIsDashboard(true);
+    } else {
+      setIsDashboard(false);
+    }
+  }, []);
+
   return (
-    <div className="p-5 shadow-md flex justify-end">
+    <div className={`p-5 shadow-md flex ${isDashboard ? 'justify-end' : 'justify-between'} items-center`}>
+      {!isDashboard && (
+        <div className="flex gap-2 items-center cursor-pointer">
+          <Image src={'/logo.png'} width={50} height={50} alt="logo" />
+          <h2 className="font-bold text-2xl">LearNova</h2>
+        </div>
+      )}
       <UserButton />
     </div>
   );

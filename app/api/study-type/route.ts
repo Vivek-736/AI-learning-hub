@@ -1,6 +1,6 @@
 import { db } from "@/configs/db";
 import { CHAPTER_NOTES_TABLE, STUDY_TYPE_CONTENT_TABLE } from "@/configs/schema";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -15,7 +15,6 @@ export async function POST(req: Request) {
           .where(eq(STUDY_TYPE_CONTENT_TABLE.courseId, courseId))
       ]);
 
-      // Normalize type comparison to lowercase
       return NextResponse.json({
         notes: notes,
         flashcard: contentList.filter(item => item.type.toLowerCase() === "flashcard"),
@@ -38,8 +37,10 @@ export async function POST(req: Request) {
     return NextResponse.json(notes);
   }
 
-  return NextResponse.json(
-    { error: "Invalid study type" },
-    { status: 400 }
-  );
+  else {
+    const result = await db.select().from(STUDY_TYPE_CONTENT_TABLE).where(and(eq(STUDY_TYPE_CONTENT_TABLE?.courseId, courseId), eq(STUDY_TYPE_CONTENT_TABLE.type, studyType)));
+
+    return NextResponse.json(result[0]);
+  }
+
 }
