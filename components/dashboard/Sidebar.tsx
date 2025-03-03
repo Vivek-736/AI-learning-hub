@@ -36,18 +36,27 @@ const Sidebar = () => {
         <h2 className="font-bold text-2xl">LearNova</h2>
       </div>
       <div className="mt-8">
-        <Link href={`/create`} className="w-full">
-          <Button className="space-x-1 w-full">
+        {totalCourse < 10 ? (
+          <Link href={`/create`} className="w-full">
+            <Button className="space-x-1 w-full">
+              <Plus />
+              <span>Create New</span>
+            </Button>
+          </Link>
+        ) : (
+          <Button disabled className="space-x-1 w-full">
             <Plus />
             <span>Create New</span>
           </Button>
-        </Link>
+        )}
         <div className="mt-6">
             {MenuList.map((menu, index) => (
-                <div key={index} className={`flex gap-2 items-center p-3 hover:bg-slate-200 rounded-lg cursor-pointer mt-3 ${path === menu.path && 'bg-slate-200'}`}>
+              <Link href={menu.path} key={index}>
+                <div className={`flex gap-2 items-center p-3 hover:bg-slate-200 rounded-lg cursor-pointer mt-3 ${path === menu.path && 'bg-slate-200'}`}>
                     <menu.icon />
                     <h2>{menu.name}</h2>
                 </div>
+              </Link>
             ))}
         </div>
       </div>

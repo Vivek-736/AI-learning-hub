@@ -13,6 +13,7 @@ export const USER_TABLE = pgTable("users", {
   userName: varchar().notNull(),
   email: varchar().notNull(),
   isMember: boolean().default(false),
+  customerId: varchar()
 });
 
 export const STUDY_MATERIAL_TABLE = pgTable("study_materials", {
@@ -39,4 +40,10 @@ export const STUDY_TYPE_CONTENT_TABLE = pgTable("study_type_contents", {
   content: json(),
   type: varchar().notNull(),
   status: varchar().default("Generating"),
+});
+
+export const INVOICE_TABLE = pgTable("invoices", {
+  id: serial().primaryKey(),
+  customerId: varchar(),
+  sessionId: varchar()
 });

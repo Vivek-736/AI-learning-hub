@@ -14,11 +14,11 @@ const CourseItem = ({ course }: CourseItemProps) => {
     <div className="border-2 border-sky-300 rounded-lg shadow-xl p-5">
       <div className="flex justify-between items-center">
         <Image src={"/course.png"} alt="a laptop pic" width={50} height={50} />
-        <h2 className="text-[10px] p-1 px-2 rounded-full bg-indigo-500 text-white">
-          12 Dec 2025
+        <h2 className="text-xs md:block hidden p-1 px-2 rounded-full bg-emerald-500 text-white">
+          New
         </h2>
       </div>
-      <h2 className="mt-3 font-medium text-xl">
+      <h2 className="mt-3 font-medium md:text-xl text-xs">
         {course?.courseLayout?.course_title}
       </h2>
       <p className="text-xs line-clamp-2 text-gray-500 mt-2">

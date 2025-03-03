@@ -8,14 +8,14 @@ const Intro = () => {
       <div className="flex flex-col min-h-80">
         <div className="flex flex-col md:flex-row items-center justify-center flex-grow p-8 group">
           <div className="md:w-1/2 text-center md:text-left flex flex-col items-center ">
-            <div className="h-auto w-[20vw] flex items-center justify-center">
+            <div className="h-auto w-[20vw] md:flex hidden items-center justify-center">
               <img
                 src="logo.png"
                 alt="Learnova"
                 className="max-w-full h-auto transition-transform duration-300 group-hover:animate-shake "
               />
             </div>
-            <h1 className="text-3xl md:text-2xl font-bold">
+            <h1 className="text-3xl md:text-2xl md:mt-0 mt-6 font-bold">
               Simplifying Education, Enhancing Progress 🚀
             </h1>
             <p className="text-md mt-4">
@@ -28,7 +28,7 @@ const Intro = () => {
               </button>
             </Link>
           </div>
-          <div className="md:w-1/2 h-30 flex items-center justify-center px-30 ">
+          <div className="md:w-1/2 flex items-center justify-center">
             <img
               src="hello.png"
               alt="sth"

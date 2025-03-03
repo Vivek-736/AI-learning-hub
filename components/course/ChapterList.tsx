@@ -10,7 +10,7 @@ const ChapterList = ({course}: ChapterListProps) => {
     const CHAPTERS = course?.courseLayout?.chapters
 
     return (
-        <div className='mt-5'>
+        <div className='mt-5 mb-8'>
             <h2 className='font-medium text-xl'>
                 Chapters
             </h2>
