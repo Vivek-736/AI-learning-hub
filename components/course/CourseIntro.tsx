@@ -2,7 +2,6 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import { Progress } from "../ui/progress";
 
 interface CourseIntroProps {
   course: any;
@@ -17,7 +16,6 @@ const CourseIntro = ({ course }: CourseIntroProps) => {
           {course?.courseLayout.course_title}
         </h2>
         <p className="line-clamp-2">{course?.courseLayout?.course_summary}</p>
-        <Progress className="mt-3" />
         <h2 className="mt-3 text-lg text-blue-600">Total Chapters: {course?.courseLayout?.chapters?.length}</h2>
       </div>
     </div>

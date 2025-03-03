@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "../ui/button";
-import { LayoutDashboard, Plus, Shield, UserCircle } from "lucide-react";
+import { LayoutDashboard, Plus, Shield } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Progress } from "../ui/progress";
 import Link from "next/link";
 import Image from "next/image";
+import { CourseCountContext } from "../context/CourseCountContext";
 
 const Sidebar = () => {
   const MenuList = [
@@ -18,13 +20,13 @@ const Sidebar = () => {
       name: "Upgrade",
       icon: Shield,
       path: "/dashboard/upgrade",
-    },
-    {
-      name: "Profile",
-      icon: UserCircle,
-      path: "/dashboard/profile",
-    },
+    }
   ];
+
+  // @ts-expect-error
+  const { totalCourse } = useContext(CourseCountContext);
+
+  const progressValue = (totalCourse/10)*100
 
   const path = usePathname();
   return (
@@ -40,7 +42,7 @@ const Sidebar = () => {
             <span>Create New</span>
           </Button>
         </Link>
-        <div>
+        <div className="mt-6">
             {MenuList.map((menu, index) => (
                 <div key={index} className={`flex gap-2 items-center p-3 hover:bg-slate-200 rounded-lg cursor-pointer mt-3 ${path === menu.path && 'bg-slate-200'}`}>
                     <menu.icon />
@@ -50,11 +52,11 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className="border p-5 bg-sky-100 rounded-lg absolute bottom-10 w-[85%]">
-        <h2 className="text-lg mb-2">Available Credits: 10</h2>
-        <Progress value={30} />
-        <h2 className="text-sm">1 Out of 10 Credits Used</h2>
-        <Link href={"/dashboard/upgrade"} className="text-purple-600 text-xs mt-3">
+      <div className="border p-5 bg-indigo-100 rounded-lg absolute bottom-10 w-[85%]">
+        <h2 className="text-lg mb-2 text-indigo-600">Available Credits: {10 - totalCourse}</h2>
+        <Progress value={progressValue} />
+        <h2 className="text-sm text-indigo-600">{totalCourse} Out of 10 Credits Used</h2>
+        <Link href={"/dashboard/upgrade"} className="text-green-600 text-xs mt-3">
             Upgrade to create more
         </Link>
       </div>

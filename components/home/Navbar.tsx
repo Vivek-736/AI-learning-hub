@@ -10,10 +10,6 @@ const Navbar = () => {
             <div className="container mx-auto flex justify-between items-center">
                 <div className="text-white text-2xl font-bold"><img src="/sth.jpg" alt="logo" className="h-20 my-[-7vh] border-indigo-500"/></div>
                 <div className="hidden md:flex space-x-6 items-center text-white text-lg">
-                    <a href="#" className="hover:underline underline underline-offset-8">Home</a>
-                    <Link href={'/'} className="hover:underline underline-offset-8">How It Works</Link>
-                    <a href="#" className="hover:underline underline-offset-8">Contact</a>
-                    <a href="#" className="hover:underline underline-offset-8">Explore Courses</a>
                     <Link href="/sign-in" className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-gray-200">LogIn</Link>
                 </div>
                 <button 

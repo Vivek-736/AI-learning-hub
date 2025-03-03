@@ -34,14 +34,7 @@ const LearningResourceSec = ({ courseId, course }: LearningResourceSecProps) => 
       icon: "/quiz.png",
       path: "/quiz",
       type: "quiz",
-    },
-    {
-      name: "QnA",
-      desc: "Get instant answers to your questions",
-      icon: "/QnA.png",
-      path: "/qa",
-      type: "qa",
-    },
+    }
   ];
 
   useEffect(() => {
@@ -64,7 +57,7 @@ const LearningResourceSec = ({ courseId, course }: LearningResourceSecProps) => 
   return (
     <div className="mt-5">
       <h2 className="font-medium text-xl">Learning Resources</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-3">
         {LearningList.map((item, index) => (
           <Link key={index} href={`/course/${courseId}${item.path}`} passHref>
             <LearningCardItem
