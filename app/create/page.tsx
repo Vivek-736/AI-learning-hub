@@ -39,12 +39,13 @@ const Create = () => {
     const courseId = uuidv4();
     setLoading(true);
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const result = await axios.post("/api/generate-course-outline", {
         courseId: courseId,
         ...formData,
         createdBy: user?.primaryEmailAddress?.emailAddress,
       });
-      console.log(result);
+      // console.log(result);
       toast("Your course content is being generated, please wait for a moment or try clicking the refresh button");
       router.replace("/dashboard");
     } catch (error) {

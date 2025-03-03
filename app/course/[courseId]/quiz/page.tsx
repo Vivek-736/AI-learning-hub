@@ -25,7 +25,7 @@ const Quiz = () => {
             courseId: courseId,
             studyType: "quiz"
         });
-        console.log(result?.data);
+        // console.log(result?.data);
         setQuiz(result.data.content.questions)
     }
 

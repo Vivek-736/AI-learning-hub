@@ -31,17 +31,18 @@ export async function POST(req: Request) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .returning({ res: STUDY_MATERIAL_TABLE } as any);
 
-  console.log(dbResult);
+  // console.log(dbResult);
 
   //Triggering the Inngest function
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const result = await inngest.send({
     name: "notes.generate",
     data: {
       course: dbResult[0].res
     }
   });
-  console.log(result);
+  // console.log(result);
 
   return NextResponse.json({ result: dbResult[0] });
 }

@@ -27,7 +27,7 @@ const CourseCard = () => {
     const result = await axios.post("/api/courses", {
       createdBy: user?.primaryEmailAddress?.emailAddress,
     });
-    console.log(result);
+    // console.log(result);
     setCourseCard(result.data.result);
     setLoading(false);
     setTotalCourse(result.data.result?.length)

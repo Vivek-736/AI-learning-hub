@@ -39,7 +39,7 @@ const Flashcards = () => {
             studyType: "flashcard"
         });
         setFlashcards(result?.data);
-        console.log(result?.data);
+        // console.log(result?.data);
     }
 
     const handleClick = () => {
