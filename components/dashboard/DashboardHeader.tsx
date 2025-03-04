@@ -18,14 +18,14 @@ const DashboardHeader = () => {
   return (
     <div className={`p-5 shadow-md flex ${isDashboard ? 'justify-end' : 'justify-between'} items-center`}>
       {!isDashboard && (
-        <Link href={'/'}>
-          <div className="flex gap-2 items-center cursor-pointer">
-            <Image src={'/logo.png'} width={50} height={50} alt="logo" />
-            <h2 className="font-bold text-2xl">LearNova</h2>
-          </div>
-        </Link>
+      <Link href={'/'}>
+        <div className="flex gap-2 items-center cursor-pointer">
+        <Image src={'/logo.png'} width={50} height={50} alt="logo" />
+        <h2 className="font-bold text-2xl">LearNova</h2>
+        </div>
+      </Link>
       )}
-      <UserButton />
+      <UserButton afterSignOutUrl="/" />
     </div>
   );
 };
