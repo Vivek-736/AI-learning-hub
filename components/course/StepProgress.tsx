@@ -30,9 +30,9 @@ const StepProgress = ({ stepCount, setStepCount, data }: StepProgressProps) => {
             }`}
           ></div>
         ))}
-        <Button onClick={() => setStepCount(stepCount + 1)} variant="ghost" size="sm">
+        {stepCount <= data.length -2 && <Button onClick={() => setStepCount(stepCount + 1)} variant="ghost" size="sm">
           Next
-        </Button>
+        </Button>}
       </div>
     </>
   );
