@@ -200,7 +200,7 @@ export default function Home() {
               <img
                 src="/placeholder.png"
                 alt="AI Learning Platform"
-                className="relative z-10 mx-auto rounded-lg shadow-xl max-w-full"
+                className="relative border-2 border-purple-400 z-10 mx-auto rounded-lg shadow-xl max-w-full"
               />
             </div>
           </motion.div>
@@ -353,8 +353,8 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="py-12 bg-gray-900 text-gray-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+      <footer className="py-6 bg-gray-900 text-gray-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-800 text-center text-sm">
           <p>
             © {new Date().getFullYear()} AI Learning Hub. All rights reserved.
           </p>
